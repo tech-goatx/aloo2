@@ -1,0 +1,19 @@
+{
+  "name": "AMAN MD",
+  "description": "AMAN MD BY Aman TechX",
+  "keywords": ["whatsapp", "baileys", "bot", "heroku"],
+  "success_url": "/pair",
+  "env": {
+    "PORT": {
+      "description": "HTTP port",
+      "required": false
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "image": "heroku/nodejs"
+}
