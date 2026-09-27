@@ -1,1 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AMAN MD | BOT</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+      -webkit-touch-callout: none !important;
+    }
 
+    img {
+      -webkit-user-drag: none !important;
+      -moz-user-drag: none !important;
+      -o-user-drag: none !important;
+      user-drag: none !important;
+      pointer-events: auto;
+    }
+
+    input, .code-value, .code-value span {
+      -webkit-user-select: text !important;
+      -moz-user-select: text !important;
+      -ms-user-select: text !important;
+      user-select: text !important;
+    }
+
+    a, button, .btn, .btn-landing {
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+    }
+
+    body {
+      -webkit-touch-callout: none !important;
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+    }
+
+    ::selection {
+      background: transparent !important;
+      color: inherit !important;
+    }
+    ::-moz-selection {
+      background: transparent !important;
+      color: inherit !important;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0b0b0b;
+      color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.30;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 650px;
+      height: 650px;
+      top: -240px;
+      left: -240px;
+      background: rgba(230, 230, 250, 0.12);
+      animation: floatOrb 26s infinite alternate ease-in-out;
+    }
+    .orb-2 {
+      width: 550px;
+      height: 550px;
+      bottom: -200px;
+      right: -200px;
+      background: rgba(190, 190, 220, 0.10);
+      animation: floatOrb 30s infinite alternate-reverse ease-in-out;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, -50px) scale(1.2); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    #landingPage {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: #0b0b0b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      transition: opacity 0.6s ease, transform 0.5s ease;
+    }
+
+    #landingPage.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96);
+    }
+
+    .landing-card {
+      background: rgba(14, 14, 18, 0.85);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 48px;
+      padding: 48px 36px 40px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255,255,255,0.015);
+      text-align: center;
+      position: relative;
+      overflow: visible;
+    }
+
+    .landing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
+    }
+
+    .landing-card .logo-wrap {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: #141418;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255,255,255,0.02);
+      position: relative;
+    }
+
+    .landing-card .logo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.10), transparent 80%);
+      opacity: 0.6;
+      pointer-events: none;
+      animation: ringPulse 4s infinite alternate ease-in-out;
+    }
+
+    @keyframes ringPulse {
+      0% { opacity: 0.4; transform: scale(1); }
+      100% { opacity: 0.8; transform: scale(1.04); }
+    }
+
+    .landing-card .logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      -webkit-user-drag: none !important;
+      -moz-user-drag: none !important;
+      -o-user-drag: none !important;
+      user-drag: none !important;
+    }
+
+    .title-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .floating-flag {
+      position: absolute;
+      top: -22px;
+      right: -42px;
+      font-size: 38px;
+      animation: floatFlag 2.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.25));
+      transform-origin: bottom center;
+      line-height: 1;
+    }
+
+    @keyframes floatFlag {
+      0% { transform: translateY(0px) rotate(-3deg) scale(1); }
+      50% { transform: translateY(-10px) rotate(3deg) scale(1.05); }
+      100% { transform: translateY(0px) rotate(-3deg) scale(1); }
+    }
+
+    .landing-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ececec;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #ececec 0%, #b8b8b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+      position: relative;
+    }
+
+    .landing-sub {
+      font-size: 15px;
+      color: #a0a0a0;
+      margin-bottom: 18px;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    .landing-divider {
+      width: 60px;
+      height: 2px;
+      background: rgba(255,255,255,0.08);
+      margin: 12px auto 20px;
+      border-radius: 4px;
+    }
+
+    .btn-landing {
+      background: #26262c;
+      color: #f0f0f0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      padding: 18px 30px;
+      border-radius: 60px;
+      font-size: 17px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .btn-landing:hover {
+      background: #32323a;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-landing:active {
+      transform: translateY(0);
+    }
+
+    .btn-landing i {
+      font-size: 18px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    #mainApp {
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+
+    #mainApp.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .card {
+      background: rgba(14, 14, 18, 0.78);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 48px;
+      padding: 48px 36px 40px;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255,255,255,0.015);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
+    }
+
+    .card-glow {
+      position: absolute;
+      inset: -40px;
+      border-radius: 70px;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.04), transparent 70%);
+      filter: blur(50px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo-wrap-main {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: #141418;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(255, 255, 255, 0.06);
+      transition: 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.02), 0 0 40px rgba(255,255,255,0.02);
+      position: relative;
+    }
+
+    .logo-wrap-main::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.10), transparent 80%);
+      opacity: 0.6;
+      pointer-events: none;
+      animation: ringPulse 4s infinite alternate ease-in-out;
+    }
+
+    .logo-wrap-main:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: scale(1.02);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255,255,255,0.04);
+    }
+
+    .logo-wrap-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      -webkit-user-drag: none !important;
+      -moz-user-drag: none !important;
+      -o-user-drag: none !important;
+      user-drag: none !important;
+    }
+
+    .title {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: #f5f5f5;
+      margin-bottom: 4px;
+      background: linear-gradient(135deg, #ececec 0%, #b8b8b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 20px rgba(255,255,255,0.03);
+    }
+
+    .subtitle {
+      font-size: 15px;
+      font-weight: 400;
+      color: #a0a0a0;
+      letter-spacing: 0.3px;
+    }
+
+    .info-box {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 20px 20px 20px 24px;
+      margin-bottom: 34px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.02);
+      backdrop-filter: blur(4px);
+    }
+
+    .info-box i {
+      color: #c8c8c8;
+      font-size: 20px;
+      margin-top: 2px;
+    }
+
+    .info-box-text strong {
+      display: block;
+      font-weight: 600;
+      font-size: 15px;
+      color: #ececec;
+      margin-bottom: 3px;
+    }
+
+    .info-box-text p {
+      font-size: 13.5px;
+      color: #9a9a9a;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .label {
+      display: block;
+      font-weight: 500;
+      font-size: 14px;
+      color: #d4d4d4;
+      margin-bottom: 8px;
+      letter-spacing: 0.2px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 18px;
+      transition: 0.2s;
+      pointer-events: none;
+    }
+
+    .input {
+      width: 100%;
+      padding: 18px 20px 18px 54px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1.5px solid rgba(255, 255, 255, 0.06);
+      border-radius: 26px;
+      color: #f0f0f0;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      transition: 0.25s ease;
+      caret-color: #c0c0c0;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+      -webkit-user-select: text !important;
+      -moz-user-select: text !important;
+      -ms-user-select: text !important;
+      user-select: text !important;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.20);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.02), inset 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .input:focus + .input-icon {
+      color: #d0d0d0;
+    }
+
+    .input::placeholder {
+      color: #666;
+      font-weight: 400;
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #7a7a7a;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hint i {
+      font-size: 12px;
+      color: #8a8a8a;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 18px 16px;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      letter-spacing: 0.2px;
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .btn-generate {
+      background: #26262c;
+      color: #f0f0f0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.01);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-generate::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 80%);
+      pointer-events: none;
+    }
+
+    .btn-generate:hover:not(:disabled) {
+      background: #32323a;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+
+    .btn-copy {
+      background: rgba(255, 255, 255, 0.035);
+      color: #e0e0e0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: none;
+      margin-top: 6px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .btn-copy:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 20px 0 16px;
+    }
+
+    .spinner {
+      width: 46px;
+      height: 46px;
+      border: 3px solid #2a2a2a;
+      border-radius: 50%;
+      border-top-color: #b8b8b8;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 14px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.015);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-text {
+      color: #9a9a9a;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .code-box {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1.5px solid rgba(255, 255, 255, 0.05);
+      border-radius: 30px;
+      padding: 26px 18px;
+      text-align: center;
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.25s ease;
+      margin-bottom: 10px;
+      box-shadow: inset 0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.005);
+      backdrop-filter: blur(4px);
+    }
+
+    .code-box.has-code {
+      border-color: rgba(200, 200, 200, 0.20);
+      background: rgba(255, 255, 255, 0.025);
+      box-shadow: 0 0 40px rgba(255,255,255,0.015), inset 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .code-box.has-error {
+      border-color: rgba(180, 100, 100, 0.25);
+      background: rgba(255, 80, 80, 0.03);
+    }
+
+    .code-placeholder {
+      color: #6a6a6a;
+      font-size: 15px;
+      font-weight: 400;
+    }
+
+    .code-value {
+      font-size: 34px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #ececec;
+      font-family: 'Inter', monospace;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .code-value i {
+      font-size: 26px;
+      color: #b8b8b8;
+    }
+
+    .error-value {
+      color: #d0a0a0;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer {
+      margin-top: 34px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: #555;
+      letter-spacing: 0.2px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: #1c1c20;
+      color: #efefef;
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8), 0 0 50px rgba(255,255,255,0.015);
+      transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 999;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(14px);
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast.error {
+      background: #241818;
+      border-color: rgba(200, 100, 100, 0.12);
+    }
+
+    @media (max-width: 540px) {
+      .card, .landing-card {
+        padding: 32px 22px 28px;
+        border-radius: 36px;
+      }
+      .title {
+        font-size: 28px;
+      }
+      .logo-wrap-main, .landing-card .logo-wrap {
+        width: 120px;
+        height: 120px;
+      }
+      .code-value {
+        font-size: 28px;
+      }
+      .landing-title {
+        font-size: 22px;
+      }
+      .floating-flag {
+        font-size: 32px;
+        right: -36px;
+        top: -18px;
+      }
+      .btn-landing {
+        padding: 16px 20px;
+        font-size: 15px;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <!-- ==================== LANDING PAGE ==================== -->
+  <div id="landingPage">
+    <div class="landing-card">
+      <div class="logo-wrap">
+        <img src="https://i.postimg.cc/63z9CfcQ/20260818-061012.jpg" alt="Aman TechX 🏳️ channel" />
+      </div>
+      
+      <div class="title-wrapper">
+        <span class="landing-title">Aman TechX</span>
+        <span class="floating-flag">🏳️</span>
+      </div>
+      
+      <div class="landing-sub">Mᴀᴋᴇ Sᴜʀᴇ Yᴏᴜ Hᴀᴠᴇ Fᴏʟʟᴏᴡᴇᴅ Oᴜʀ Cʜᴀɴɴᴇʟ</div>
+      <div class="landing-divider"></div>
+
+      <div class="btn-group">
+        <a href="https://whatsapp.com/channel/0029Vb8A5sr4inovcbobwY21" target="_blank" rel="noopener noreferrer" class="btn-landing">
+          <i class="fab fa-whatsapp"></i> Oғғɪᴄɪᴀʟ Cʜᴀɴɴᴇʟ
+        </a>
+        <button class="btn-landing" id="doneBtn">
+          <i class="fas fa-check-circle"></i> Dᴏɴᴇ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN APP ==================== -->
+  <div class="container" id="mainApp">
+    <div class="card">
+      <div class="card-glow"></div>
+
+      <div class="header">
+        <a href="https://whatsapp.com/channel/0029Vb8A5sr4inovcbobwY21" target="_blank" rel="noopener noreferrer" class="logo-wrap-main">
+          <img src="https://i.postimg.cc/63z9CfcQ/20260818-061012.jpg" alt="AMAN-MD channel" />
+        </a>
+        <div class="title-wrapper">
+          <h1 class="title">AMAN-MD</h1>
+          <span class="floating-flag">🏳️</span>
+        </div>
+        <p class="subtitle">Gᴇɴᴇʀᴀᴛᴇ Yᴏᴜʀ Pᴀɪʀɪɴɢ Cᴏᴅᴇ</p>
+      </div>
+
+      <div class="info-box">
+        <i class="fas fa-circle-info"></i>
+        <div class="info-box-text">
+          <strong>Qᴜɪᴄᴋ Sᴇᴛᴜᴘ!</strong>
+          <p>Eɴᴛᴇʀ ʏᴏᴜʀ Wʜᴀᴛsᴀᴘᴘ ɴᴜᴍʙᴇʀ ᴛᴏ ɪɴsᴛᴀɴᴛʟʏ ɢᴇɴᴇʀᴀᴛᴇ ᴀ ᴘᴀɪʀɪɴɢ ᴄᴏᴅᴇ ғᴏʀ Wʜᴀᴛsᴀᴘᴘ.</p>
+        </div>
+      </div>
+
+      <form id="pairForm">
+        <div class="form-group">
+          <label class="label">Wʜᴀᴛsᴀᴘᴘ Nᴜᴍʙᴇʀ</label>
+          <div class="input-wrapper">
+            <input type="tel" id="phoneNumber" class="input" placeholder="9234306xxxx" pattern="[0-9]+" required />
+            <i class="fas fa-phone input-icon"></i>
+          </div>
+          <div class="hint">
+            <i class="fas fa-lightbulb"></i>
+            Iɴᴄʟᴜᴅᴇ ᴄᴏᴜɴᴛʀʏ ᴄᴏᴅᴇ ᴡɪᴛʜᴏᴜᴛ "+" (e.g., 92 Fᴏʀ Pᴀᴋɪsᴛᴀɴ)
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-generate" id="generateBtn">
+          <i class="fas fa-key"></i> Gᴇɴᴇʀᴀᴛᴇ Pᴀɪʀ Cᴏᴅᴇ
+        </button>
+
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+          <p class="loading-text">Yᴏᴜʀ ᴘᴀɪʀ ᴄᴏᴅᴇ ɪs ɢᴇɴᴇʀᴀᴛɪɴɢ...</p>
+        </div>
+
+        <div class="code-box" id="codeBox">
+          <div class="code-placeholder">Yᴏᴜʀ ᴘᴀɪʀ ᴄᴏᴅᴇ ᴡɪʟʟ ᴀᴘᴘᴇᴀʀ ʜᴇʀᴇ</div>
+        </div>
+
+        <button type="button" class="btn btn-copy" id="copyBtn">
+          <i class="fas fa-copy"></i> Cᴏᴘʏ Cᴏᴅᴇ
+        </button>
+      </form>
+
+      <div class="footer">
+        <p class="footer-text">© AMAN-MD | <b>Aᴍᴀɴ TᴇᴄʜX</b></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST ==================== -->
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span>Cᴏᴅᴇ Cᴏᴘɪᴇᴅ Sᴜᴄᴄᴇssғᴜʟʟʏ!</span>
+  </div>
+
+  <script>
+    (function() {
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
+
+      document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        return false;
+      });
+
+      document.addEventListener('copy', function(e) {
+        const sel = window.getSelection && String(window.getSelection());
+        if (sel && /^[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(sel.trim())) return;
+        e.preventDefault();
+        return false;
+      });
+
+      const landingPage = document.getElementById('landingPage');
+      const mainApp = document.getElementById('mainApp');
+      const doneBtn = document.getElementById('doneBtn');
+
+      doneBtn.addEventListener('click', function() {
+        landingPage.classList.add('hidden');
+        mainApp.classList.add('visible');
+      });
+
+      const phoneInput = document.getElementById('phoneNumber');
+      const generateBtn = document.getElementById('generateBtn');
+      const loading = document.getElementById('loading');
+      const codeBox = document.getElementById('codeBox');
+      const copyBtn = document.getElementById('copyBtn');
+      const toast = document.getElementById('toast');
+      const form = document.getElementById('pairForm');
+
+      let currentCode = null;
+      let toastTimer = null;
+      let cooldownTimer = null;
+      let cooldownRemaining = 0;
+
+      function showToast(message, isError = false) {
+        if (toastTimer) clearTimeout(toastTimer);
+        const icon = toast.querySelector('i');
+        const span = toast.querySelector('span');
+        icon.className = isError ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+        span.textContent = message;
+        toast.className = `toast ${isError ? 'error' : ''} show`;
+        toastTimer = setTimeout(() => {
+          toast.classList.remove('show');
+          toastTimer = null;
+        }, 2800);
+      }
+
+      function validatePhone(num) {
+        const cleaned = num.replace(/\D/g, '');
+        return cleaned.length >= 10 && cleaned.length <= 15;
+      }
+
+      function resetCodeBox() {
+        codeBox.className = 'code-box';
+        codeBox.innerHTML = `<div class="code-placeholder">Yᴏᴜʀ ᴘᴀɪʀ ᴄᴏᴅᴇ ᴡɪʟʟ ᴀᴘᴘᴇᴀʀ ʜᴇʀᴇ</div>`;
+        copyBtn.style.display = 'none';
+        currentCode = null;
+      }
+
+      function showError(msg) {
+        codeBox.className = 'code-box has-error';
+        codeBox.innerHTML = `
+          <div class="error-value">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>${msg}</span>
+          </div>
+        `;
+        copyBtn.style.display = 'none';
+        currentCode = null;
+      }
+
+      function showCode(code) {
+        currentCode = code;
+        codeBox.className = 'code-box has-code';
+        codeBox.innerHTML = `
+          <div class="code-value">
+            <i class="fas fa-check-circle"></i>
+            <span>${code}</span>
+          </div>
+        `;
+        copyBtn.style.display = 'flex';
+      }
+
+      function startCooldown() {
+        cooldownRemaining = 8;
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = `<i class="fas fa-clock"></i> Please wait ${cooldownRemaining}s`;
+
+        if (cooldownTimer) clearInterval(cooldownTimer);
+        cooldownTimer = setInterval(() => {
+          cooldownRemaining--;
+          if (cooldownRemaining <= 0) {
+            clearInterval(cooldownTimer);
+            cooldownTimer = null;
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = `<i class="fas fa-key"></i> Gᴇɴᴇʀᴀᴛᴇ Pᴀɪʀ Cᴏᴅᴇ`;
+          } else {
+            generateBtn.innerHTML = `<i class="fas fa-clock"></i> Please wait ${cooldownRemaining}s`;
+          }
+        }, 1000);
+      }
+
+      async function generatePairCode(e) {
+        e.preventDefault();
+
+        if (cooldownRemaining > 0) return;
+
+        const raw = phoneInput.value.trim();
+        if (!raw) {
+          showError('Pʟᴇᴀsᴇ ᴇɴᴛᴇʀ ʏᴏᴜʀ Wʜᴀᴛsᴀᴘᴘ ɴᴜᴍʙᴇʀ');
+          showToast('Phone number is required', true);
+          return;
+        }
+        if (!validatePhone(raw)) {
+          showError('Pʟᴇᴀsᴇ ᴇɴᴛᴇʀ ᴀ ᴠᴀʟɪᴅ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ');
+          showToast('Invalid phone number format', true);
+          return;
+        }
+
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = `<i class="fas fa-key"></i> Generating...`;
+        loading.style.display = 'block';
+        resetCodeBox();
+
+        const cleaned = raw.replace(/\D/g, '');
+        try {
+          let data = null;
+          for (let i = 0; i < 40; i++) {
+            const resp = await fetch(`/code?number=${encodeURIComponent(cleaned)}`);
+            if (!resp.ok && resp.status !== 202) {
+              let errorText = '';
+              try {
+                const errJson = await resp.json();
+                errorText = (errJson && (errJson.error || errJson.message)) || '';
+              } catch (_) {
+                errorText = await resp.text();
+              }
+              throw new Error(errorText || 'Server error');
+            }
+            data = await resp.json();
+            if (data && data.code) break;
+            await new Promise((r) => setTimeout(r, 700));
+          }
+
+          if (data && data.code) {
+            showCode(data.code);
+            showToast('Pᴀɪʀ ᴄᴏᴅᴇ ɢᴇɴᴇʀᴀᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ!');
+            startCooldown();
+          } else {
+            throw new Error((data && data.error) || 'Service temporarily unavailable');
+          }
+        } catch (err) {
+          console.error('Pair fetch error:', err);
+          showError('Fᴀɪʟᴇᴅ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ ᴄᴏᴅᴇ. Pʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ.');
+          showToast('Error generating code', true);
+          generateBtn.disabled = false;
+          generateBtn.innerHTML = `<i class="fas fa-key"></i> Gᴇɴᴇʀᴀᴛᴇ Pᴀɪʀ Cᴏᴅᴇ`;
+        } finally {
+          loading.style.display = 'none';
+        }
+      }
+
+      async function copyCode() {
+        if (!currentCode) return;
+        try {
+          await navigator.clipboard.writeText(currentCode);
+          const prevHtml = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<i class="fas fa-check"></i> Cᴏᴘɪᴇᴅ!';
+          copyBtn.disabled = true;
+          copyBtn.style.opacity = '0.7';
+          showToast('Cᴏᴅᴇ ᴄᴏᴘɪᴇᴅ ᴛᴏ ᴄʟɪᴘʙᴏᴀʀᴅ!');
+          setTimeout(() => {
+            copyBtn.innerHTML = prevHtml;
+            copyBtn.disabled = false;
+            copyBtn.style.opacity = '1';
+          }, 1900);
+        } catch (_) {
+          showToast('Fᴀɪʟᴇᴅ ᴛᴏ ᴄᴏᴘʏ ᴄᴏᴅᴇ', true);
+        }
+      }
+
+      form.addEventListener('submit', generatePairCode);
+      copyBtn.addEventListener('click', copyCode);
+
+      phoneInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '');
+        if (codeBox.classList.contains('has-error')) {
+          resetCodeBox();
+        }
+      });
+
+      phoneInput.addEventListener('focus', function() {
+        if (codeBox.classList.contains('has-error')) resetCodeBox();
+      });
+    })();
+  </script>
+</body>
+</html>
